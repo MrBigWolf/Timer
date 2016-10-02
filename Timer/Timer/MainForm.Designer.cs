@@ -33,11 +33,11 @@
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
             this.tabTimer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.labelTime = new System.Windows.Forms.Label();
-            this.buttonStart = new System.Windows.Forms.Button();
-            this.buttonStop = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.labelTime = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabTimer.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +49,10 @@
             this.statusStrip1.Size = new System.Drawing.Size(416, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // mainTimer
+            // 
+            this.mainTimer.Tick += new System.EventHandler(this.mainTimer_Tick);
             // 
             // tabTimer
             // 
@@ -74,40 +78,19 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Timer";
             // 
-            // tabPage2
+            // buttonReset
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(383, 251);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // labelTime
-            // 
-            this.labelTime.AutoSize = true;
-            this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelTime.Location = new System.Drawing.Point(71, 53);
-            this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(234, 51);
-            this.labelTime.TabIndex = 0;
-            this.labelTime.Text = "00 : 00 : 00";
-            // 
-            // buttonStart
-            // 
-            this.buttonStart.BackColor = System.Drawing.Color.Lime;
-            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonStart.FlatAppearance.BorderSize = 0;
-            this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonStart.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonStart.Location = new System.Drawing.Point(68, 138);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 30);
-            this.buttonStart.TabIndex = 1;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = false;
+            this.buttonReset.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonReset.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonReset.FlatAppearance.BorderSize = 0;
+            this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonReset.Location = new System.Drawing.Point(230, 138);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(75, 30);
+            this.buttonReset.TabIndex = 3;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = false;
             // 
             // buttonStop
             // 
@@ -123,19 +106,41 @@
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = false;
             // 
-            // buttonReset
+            // buttonStart
             // 
-            this.buttonReset.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.buttonReset.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonReset.FlatAppearance.BorderSize = 0;
-            this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonReset.Location = new System.Drawing.Point(230, 138);
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(75, 30);
-            this.buttonReset.TabIndex = 3;
-            this.buttonReset.Text = "Reset";
-            this.buttonReset.UseVisualStyleBackColor = false;
+            this.buttonStart.BackColor = System.Drawing.Color.Lime;
+            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonStart.FlatAppearance.BorderSize = 0;
+            this.buttonStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonStart.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonStart.Location = new System.Drawing.Point(68, 138);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(75, 30);
+            this.buttonStart.TabIndex = 1;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = false;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTime.Location = new System.Drawing.Point(71, 53);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(234, 51);
+            this.labelTime.TabIndex = 0;
+            this.labelTime.Text = "00 : 00 : 00";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(383, 251);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
