@@ -44,8 +44,34 @@ namespace Timer
         public int GetSeconds() { return (int)seconds; }
         public int GetMinutes() { return (int)minutes; }
         public int GetHours()   { return (int)hours; }
+
+        public void Encrease(int seconds)
+        {
+            if (seconds < 0)
+                seconds = 0;
+            this.seconds += (uint)seconds;
+
+            while ((int)(this.seconds) - 60 >= 0)
+            {
+                this.seconds -= 60;
+                minutes++;
+
+                if (minutes >= 60)
+                {
+                    minutes = 0;
+                    hours++;
+                }
+
+                if (hours >= 24)
+                    hours = 0;
+            }
+        }
+
         public void Decrease(int seconds)
         {
+            if (seconds < 0)
+                seconds = 0;
+
             while(seconds - this.seconds >= 0)
             {
                 if (seconds > this.seconds)

@@ -18,6 +18,8 @@ namespace Timer
         public MainForm()
         {
             InitializeComponent();
+
+            time = new Time();
         }
 
         public void PrintTime(Time time)
@@ -34,13 +36,21 @@ namespace Timer
             labelTime.Text = time_string;
         }
 
-        
+        private void EncreaseTime(int seconds)
+        {
+            time.Encrease(seconds);
+            PrintTime(time);
+        }
+
+        private void DecreaseTime(int seconds)
+        {
+            time.Decrease(seconds);
+            PrintTime(time);
+        }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            time = new Time(100);
             PrintTime(time);
-
             mainTimer.Enabled = true;
         }
 
@@ -53,6 +63,48 @@ namespace Timer
             }
             else
                 mainTimer.Enabled = false;
+        }
+
+        private void buttonHoursPlus_Click(object sender, EventArgs e)
+        {
+            EncreaseTime(3600);
+        }
+
+        private void buttonMinutesPlus_Click(object sender, EventArgs e)
+        {
+            EncreaseTime(60);
+        }
+
+        private void buttonSecondsPlus_Click(object sender, EventArgs e)
+        {
+            EncreaseTime(1);
+        }
+
+        private void buttonHoursMinus_Click(object sender, EventArgs e)
+        {
+            DecreaseTime(3600);
+        }
+
+        private void buttonMinutesMinus_Click(object sender, EventArgs e)
+        {
+            DecreaseTime(60);
+        }
+
+        private void buttonSecondsMinus_Click(object sender, EventArgs e)
+        {
+            DecreaseTime(1);
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            mainTimer.Enabled = false;
+            PrintTime(time);
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            time = new Time();
+            PrintTime(time);
         }
     }
 }
