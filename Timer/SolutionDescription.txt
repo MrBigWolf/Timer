@@ -1,1 +1,2 @@
 Timer v1.0 VS2013
+All right reserved
